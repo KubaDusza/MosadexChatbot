@@ -83,6 +83,8 @@ key features:
         display_chat_buttons()
 
     with col2:
+        display_notifications(notifications)
+
         st.header("Example Record Data")
         edited_record_data = st.data_editor(data=st.session_state.pharmacy_example_record_data,
                                 num_rows="dynamic",
@@ -109,7 +111,7 @@ key features:
 
 
         #notifications
-        display_notifications(notifications)
+
         #if notifications is not None:
 
 
