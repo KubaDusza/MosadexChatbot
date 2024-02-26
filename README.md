@@ -1,6 +1,6 @@
 
 
-# 🦆 Mosadex Pharmacy Chatbot Demo 🐤
+# 💊 Mosadex Pharmacy Chatbot Demo 👩‍⚕️
 [duckyai.streamlit.app](https://duckyai.streamlit.app/?access_key=bbe22d09-e2dc-40ce-8617-82421a285b05)
 # Pharmacy Assistant Chatbot Demo
 
