@@ -1,55 +1,51 @@
 
 
-# 🦆 Ducky Chatbot 🐤
+# 🦆 Mosadex Pharmacy Chatbot Demo 🐤
 [duckyai.streamlit.app](https://duckyai.streamlit.app/?access_key=bbe22d09-e2dc-40ce-8617-82421a285b05)
-An AI assistant created to be helpful, harmless, and honest. Just like a friendly duck! *quack!*
+# Pharmacy Assistant Chatbot Demo
 
-This chatbot allows users to upload documents and chat with the bot to get information from the documents. The bot will search the uploaded documents and use relevant excerpts to answer your questions.
+Created for the Software Engineering class, this demo showcases the capabilities of a sophisticated chatbot system designed to assist in the pharmacy industry by interacting with patients and pharmacists alike.
 
-## How it works *quack!*
+## How it Works
 
-1. Upload PDF documents using the file uploader button
-2. Type a question in the chat interface
-3. The bot will search the documents and try to find the best answer
-4. You can also ask it general questions
+1. Interacts with patients through a chat interface for queries regarding pharmacy records or services.
+2. Retrieves and modifies patient records as per user requests.
+3. Notifies pharmacists about updates or critical alerts through the system.
+4. Identifies urgent user messages and activates warning notifications for immediate attention.
 
-## What can it do?
-- Take in multiple PDFs
-- Answer general and detailed questions to the best of its duck abilities.
-- Provide context and excerpts from uploaded documents
-- your emoji will be based on the emotion of the message!
+## What Can It Do?
 
-## Technologies used
-This chatbot is built using:
+- **Retrieve Information**: Works with serialized record data and unorganized text data like pharmacy web pages.
+- **Modify Records**: Can add new data or change existing record information upon request.
+- **Pharmacist Notifications**: Capable of sending notifications to pharmacists with necessary updates or messages.
+- **Warning System**: Automatically sends alerts in response to critical messages to ensure prompt attention.
 
-- Streamlit for the web interface
-- Langchain for NLP features:
-    - text splitting
-    - embedding
-    - vectorizing, etc.
-- Transformers and Huggingface API for the emoji emotion display
-- OpenAI API for embeddings and the LLM
-
-## TODOs
-- Add OCR support
-- Support additional file formats like docx, txt, csv, xslx etc
-- Add multiprocessing when vectorizing document text
-- Save user messages and session state per user
-- Improve information extraction/retrieval
 
 ## Installation
-you can use it on [duckyai.streamlit.app](https://duckyai.streamlit.app/?access_key=bbe22d09-e2dc-40ce-8617-82421a285b05) or host it by yourself! it's so easy!
 
-1. Clone the repo
-2. Create a virtualenv and activate:
-    - on MacOS/Linux:
-        python3 -m venv myenv && source myenv/bin/activate
-    - on Windows:
-        python -m venv myenv && myenv\Scripts\activate
- 
-4. Install dependencies: pip install -r requirements.txt
-5. Create a credentials file in the .streamlit directory and add OpenAI API key
-6. change the REMOVE_RESTRICTIONS flag in the constants.py to True
-7. Run the app: streamlit run app.py
+To get started with the Pharmacy Assistant Chatbot:
 
-So come on and give it a quack! The friendliest chatbot around won't quack you up but will do its best to help out. 🦆🐤
+1. **Clone the repository**:
+    ```
+    git clone https://github.com/yourgithub/pharmacy-assistant-chatbot.git
+    ```
+
+2. **Set up a virtual environment** and activate it:
+    - **MacOS/Linux**:
+        ```
+        python3 -m venv venv && source venv/bin/activate
+        ```
+    - **Windows**:
+        ```
+        python -m venv venv && venv\Scripts\activate
+        ```
+
+3. **Install dependencies**:
+    ```
+    pip install -r requirements.txt
+    ```
+
+4. **Run the application**:
+    ```
+    streamlit run app.py
+    ```
