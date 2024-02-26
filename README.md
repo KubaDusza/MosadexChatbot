@@ -4,7 +4,7 @@
 [mosadexchatbotdemo.app](https://mosadexchatbotdemo.streamlit.app/?access_key=9bdc3ed9-4837-4c73-925c-dd6eb1850601)
 # Pharmacy Assistant Chatbot Demo
 
-Created for the Software Engineering class, this demo showcases the capabilities of a sophisticated chatbot system designed to assist in the pharmacy industry by interacting with patients and pharmacists alike.
+Created for the Software Engineering class, this demo showcases the capabilities of a chatbot system designed to assist in the pharmacy industry by interacting with patients and pharmacists alike.
 
 ## How it Works
 
