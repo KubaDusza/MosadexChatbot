@@ -1,0 +1,11 @@
+[theme]
+base="light"
+primaryColor="#4D9FEC"  # Bright blue for trust and professionalism
+secondaryColor="#3EB489"  # Calming green, health-associated
+backgroundColor="#F0F4F8"  # Light grey for a clean and unobtrusive background
+secondaryBackgroundColor="#FFFFFF"  # Pure white for areas needing emphasis or clarity
+textColor="#333333"  # Dark grey for text, ensuring readability on light backgrounds
+font="monospace"
+
+[server]
+maxUploadSize=1
