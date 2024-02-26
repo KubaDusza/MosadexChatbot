@@ -23,11 +23,13 @@ Created for the Software Engineering class, this demo showcases the capabilities
 
 ## Installation
 
+You can use the demo through the webapp or host it yourself:
+
 To get started with the Pharmacy Assistant Chatbot:
 
 1. **Clone the repository**:
     ```
-    git clone https://github.com/yourgithub/pharmacy-assistant-chatbot.git
+    git clone https://github.com/KubaDusza/MosadexChatbot.git
     ```
 
 2. **Set up a virtual environment** and activate it:
