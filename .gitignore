@@ -21,3 +21,5 @@
 /PDF_QA_v3.iml
 /text_versions
 /app_old.py
+.streamlit/secrets.toml
+.streamlit/credentials.toml
