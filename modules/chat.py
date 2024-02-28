@@ -197,6 +197,25 @@ def manipulate_dataframe(dataframe, args):
     return dataframe, response, {"success": f" succesfully changed field [{row},{column}] to {new_value}"} #df, response, notificaion
 
 
+
+
+def detect_inside_response(current_string):
+    # Regular expression to find the "response" key and its value up to the current point
+    # This regex handles cases where the "response" string is partially received
+    response_regex = r'"response":\s*"((?:[^"\\]|\\.)*)'
+
+    # Search for the "response" pattern in the current string
+    match = re.search(response_regex, current_string)
+
+    if match:
+        response_content = match.group(1)  # Extract the content of the "response" up to this point
+    else:
+
+        response_content = ""  # No content since we're not inside "response"
+
+    return response_content
+
+
 def ai_message(docs):
     notifications = None
 
@@ -214,8 +233,9 @@ def ai_message(docs):
         {"role": "system", "content": "### end of relevant documents. the next messages contain the chat history ###"}]
 
     with (st.chat_message("assistant", avatar=MAIN_ICON)):
-        functioncall_placeholder = st.empty()
+
         message_placeholder = st.empty()
+        functioncall_placeholder = st.empty()
 
         full_response = ""
         messages = [INSTRUCTION_MESSAGE] + relevant_docs_messages + chat_history_header + [
@@ -248,9 +268,12 @@ def ai_message(docs):
                     if tool_call.function.arguments:
                         function_arguments += tool_call.function.arguments
 
+                message_placeholder.markdown(detect_inside_response(function_arguments)+ "▌")
+
                 functioncall_placeholder.markdown(f"```python\n"
                                                   f"function_name: {function_name}, arguments: {function_arguments}\n"
                                                   f"```")
+
 
 
             else:
