@@ -1,6 +1,7 @@
 import json
 import stat
 
+import pandas
 import streamlit
 
 from imports import *
@@ -36,7 +37,7 @@ TOOLS = [{
                 },
                 "new_value": {
                     "type": "string",
-                    "description": "The new value to set for the specified field (cell) in the DataFrame."
+                    "description": "The new value to set for the specified field (cell) in the DataFrame. If you want to set an empty field, use \"None\" "
                 }
 
             },
@@ -173,6 +174,11 @@ def manipulate_dataframe(dataframe, args):
     row = args['row']
     column = args['column']
     new_value = args['new_value']
+
+
+
+    if isinstance(new_value, str) and new_value.strip().lower() in ["none", "null", ""]:
+        new_value = None
 
     # Check if the specified column exists in the DataFrame
     if column not in dataframe.columns:
