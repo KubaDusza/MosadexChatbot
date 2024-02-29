@@ -12,6 +12,9 @@ MAIN_ICON = "💊"
 # the number of messages the chatbot will remember
 SLIDING_CHAT_WINDOW_SIZE = 5
 
+
+
+
 #PT_MODEL = "gpt-3.5-turbo"
 GPT_MODEL = "gpt-4"
 
@@ -23,6 +26,7 @@ WHOAMI='''Chatbot Assistant Configuration:
   - Behavior: Polite, informative, and patient.
   - Limitations: Do not provide medical advice beyond the scope of pharmacy services. Refer to a pharmacist for complex inquiries.
   '''
+
 
 
 # Chat
@@ -37,6 +41,49 @@ END OF INSTRUCTIONS ###\n
 Next messages will contain relevant documents.'''
 
 FIRST_MESSAGE = '''What is this document about?'''
+
+MOCK_PHARMACY_STORE_IDS = {
+    "Green Valley Pharmacy": "GV-001",
+    "Lakeside Wellness Pharmacy": "LW-067",
+    "Sunrise Health Pharmacy": "SH-011",
+}
+
+OPENING_HOURS_MOCK_PHARMACY_API_RESPONSE = {
+    "GV-001": {
+        "business_hours": [
+            {"day": "Monday", "from": "08:00", "to": "20:00"},
+            {"day": "Tuesday", "from": "08:00", "to": "20:00"},
+            {"day": "Wednesday", "from": "08:00", "to": "20:00"},
+            {"day": "Thursday", "from": "08:00", "to": "20:00"},
+            {"day": "Friday", "from": "08:00", "to": "20:00"},
+            {"day": "Saturday", "from": "10:00", "to": "14:00"},
+            {"day": "Sunday", "from": "None", "to": "None"}
+        ]
+    },
+    "LW-067": {
+        "business_hours": [
+            {"day": "Monday", "from": "09:00", "to": "19:00"},
+            {"day": "Tuesday", "from": "09:00", "to": "19:00"},
+            {"day": "Wednesday", "from": "09:00", "to": "19:00"},
+            {"day": "Thursday", "from": "09:00", "to": "19:00"},
+            {"day": "Friday", "from": "09:00", "to": "19:00"},
+            {"day": "Saturday", "from": "None", "to": "None"},
+            {"day": "Sunday", "from": "None", "to": "None"}
+        ]
+    },
+    "SH-011": {
+        "business_hours": [
+            {"day": "Monday", "from": "07:00", "to": "17:00"},
+            {"day": "Tuesday", "from": "07:00", "to": "17:00"},
+            {"day": "Wednesday", "from": "07:00", "to": "17:00"},
+            {"day": "Thursday", "from": "07:00", "to": "17:00"},
+            {"day": "Friday", "from": "07:00", "to": "17:00"},
+            {"day": "Saturday", "from": "08:00", "to": "12:00"},
+            {"day": "Sunday", "from": "None", "to": "None"}
+        ]
+    }
+}
+
 
 
 #=========

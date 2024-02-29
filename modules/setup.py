@@ -12,7 +12,7 @@ def setup():
         page_title=NAME_OF_THE_SITE,
         page_icon=MAIN_ICON,
         layout="wide",
-        initial_sidebar_state="collapsed",
+        initial_sidebar_state="expanded",
         menu_items={
             "About": "mailto: jacob.dusza@gmail.com linkedin:https://www.linkedin.com/in/jakub-dusza-041a9023b/",
             # "Get help": "https://www.youtube.com/",
@@ -32,6 +32,7 @@ def setup():
 
     if 'whoami' not in st.session_state:
         st.session_state.whoami = WHOAMI
+
 
     if "openai_client" not in st.session_state:
         st.session_state.openai_client = openai.OpenAI()

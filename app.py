@@ -49,9 +49,22 @@ key features:
 
 - **Serialized Record Data Interactions**: Retrieve or modify record data
 - **Text, Unorganized Data Interactions**: retrieve information from unprocessed, already avaliable data, like pharmacy webpage
+- **API/Tool Usage Integration**: use or call external tools, functions, APIs, like the Opening Hours API
 - **Pharmacist Notifications**: notify pharmacists with updates
 - **Warning Notification System**: Sends alerts in response to critical messages for immediate attention
         """)
+
+
+
+        with st.expander("Things to try", expanded=True):
+            st.write("1. add behaviour to the chatbot by inserting some requirement to the **System Prompt**, like:\n\n"
+                     "          act like a duck, by adding *quack!* to your sentences       \n\n"
+                     "2. Try asking for the data in the patients records or from the text information about the pharmacy\n\n"
+                     "3. Ask it to add new or change existing record data, like changing the age, scheduling an appointment, taking a note, or saying, that you are allergicn\n\n"
+                     "4. Ask it for opening hours of one of given pharmacies, like \"Green Valley Pharmacy\" and watch it use the API to answer the question\n\n"
+                     "5. Ask it to notify the pharmacist about something\n\n"
+                     "6. Send a worrying message on the chat, like:\n\n "
+                     "'i think i overdosed' to test the warning notification system")
 
         with st.expander("System Prompt"):
             system_prompt = st.text_area(label="write a system message, that tells the model how to act",
@@ -59,16 +72,11 @@ key features:
                                          height=350)
             st.session_state.whoami = system_prompt
 
-        with st.expander("Things to try"):
-            st.write("1. add behaviour to the chatbot by inserting some requirement to the system message, like:\n"
-                     "  - act like a duck, by adding *quack!* to your sentences\n\n"
-                     "2. Try asking for the data in the patients records or from the text information about the pharmacy\n\n"
-                     "3. Ask it to add new or change existing record data, like changing the age, scheduling an appointment, taking a note, or saying, that you are allergicn\n\n"
-                     "4. Ask it to notify the pharmacist about something\n\n"
-                     "5. Send a worrying message on the chat, like:\n\n "
-                     "'i think i overdosed' to test the warning notification system")
+        with st.expander("Mock pharmacy store ids"):
+            st.markdown(MOCK_PHARMACY_STORE_IDS)
 
-
+        with st.expander("Mock API responses with opening hours"):
+            st.markdown(f"``` {OPENING_HOURS_MOCK_PHARMACY_API_RESPONSE} ```" )
 
     with col1:
         display_chat()

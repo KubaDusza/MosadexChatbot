@@ -49,7 +49,7 @@ TOOLS = [{
       "type": "function",
       "function": {
         "name": "notify_pharmacist",
-        "description": "Sends a notification message to the pharmacist and provides a predetermined response to the user to confirm the action.",
+        "description": "Sends a notification message to the pharmacist and provides a predetermined response to the user to confirm the action. User can also request to send this message",
         "parameters": {
           "type": "object",
           "properties": {
@@ -71,9 +71,37 @@ TOOLS = [{
           "required": ["message", "response", "notification_type"]
         }
       }
+    },
+{
+  "type": "function",
+  "function": {
+    "name": "get_pharmacy_opening_hours",
+    "description": "Retrieves and displays the opening hours for a specified pharmacy.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "store_code": {
+          "type": "string",
+          "description": f"The unique identifier for the pharmacy whose opening hours are to be retrieved. For demonstration purposes, unless a valid id given, use \"GV-001\", or use this dict to find the code: {MOCK_PHARMACY_STORE_IDS} "
+        },
+        #"day":{
+        #    "type": "string",
+        #    "description": "The day of which we want the opening hours of. Don't use, if a specific day is not requested"
+        #}
+      },
+      "required": ["store_code"]
     }
+  }
+}
 
 ]
+
+
+
+
+
+
+
 def get_response(messages, model = None, stream = True, temperature = 1.0, tools = None):
     if model is None:
         model = st.session_state["openai_model"]
@@ -144,7 +172,10 @@ def notify_pharmacist(function_arguments):
     notification = {notification_type: function_arguments['message']}
     return response, notification
 
-def hanhandle_function_calls(function_name, function_arguments_json):
+
+
+
+def hanhandle_function_calls(function_name, function_arguments_json, message_placeholder,functioncall_placeholder):
     response = ""
     notifications = None
     if function_name == "manipulate_dataframe":
@@ -153,6 +184,52 @@ def hanhandle_function_calls(function_name, function_arguments_json):
 
     if function_name == "notify_pharmacist":
         response, notifications = notify_pharmacist(function_arguments=function_arguments_json)
+
+    if function_name == "get_pharmacy_opening_hours":
+
+        store_code = function_arguments_json.get("store_code")
+
+        print("function_arguments_json:", function_arguments_json)
+
+        print("!!!STORE CODE:", store_code)
+
+        opening_hours = OPENING_HOURS_MOCK_PHARMACY_API_RESPONSE.get(store_code)
+
+        day = getattr(function_arguments_json, "day", "")
+
+        if day != "":
+            day = f"day: {day}"
+
+        if opening_hours is None:
+            return f"couldn't find a store code \"{store_code}\" in the database", None
+
+        INSTRUCTION_MESSAGE = {
+            "role": "system",
+            "content": SYSTEM_MESSAGE.format(
+                ASSISTANT_IDENTITY=st.session_state.whoami) + f" current date and time: {get_current_datetime()}"
+
+        }
+        chat_history_footer = [
+            {"role": "system",
+             "content": f"### give the opening hours to the user given this data: {day, opening_hours}"}]
+
+        messages = [INSTRUCTION_MESSAGE] + [
+            {"role": m["role"], "content": m["content"]} for m in
+            st.session_state.messages[-SLIDING_CHAT_WINDOW_SIZE:] + chat_history_footer]
+
+
+
+        notifications = {"info": f"made a call to the API with arguments: \n \n 'store_code': '{store_code}' \n\n and got a response:\n\n {opening_hours}"}
+
+        for chunk in get_response(messages):
+            chunk = chunk.choices[0].delta
+
+            content = getattr(chunk, "content", "")
+            if content:
+                response += content
+            # full_response += chunk.choices[0].delta.get("content", "")
+            message_placeholder.markdown(response + "▌")
+
 
 
     return response, notifications
@@ -216,15 +293,24 @@ def detect_inside_response(current_string):
     return response_content
 
 
+def get_current_datetime():
+    # Capturing the current moment
+    now = datetime.now()
+
+    # Crafting the string representation
+    formatted_now = now.strftime("%Y-%m-%d %H:%M:%S")
+
+    return formatted_now
+
 def ai_message(docs):
     notifications = None
 
     INSTRUCTION_MESSAGE = {
         "role": "system",
-        "content": SYSTEM_MESSAGE.format(ASSISTANT_IDENTITY = st.session_state.whoami)
-    }
+        "content": SYSTEM_MESSAGE.format(ASSISTANT_IDENTITY = st.session_state.whoami) + f" current date and time: {get_current_datetime()}"
 
-    if docs:
+    }
+    if docs: # TODO: add a doc object with metadata to pass to the model
         relevant_docs_messages = [{"role": "assistant", "content": "content of document fragment:\n" + doc} for doc in docs]
     else:
         relevant_docs_messages = [{"role": "system", "content": "there are no available documents from the user"}]
@@ -294,7 +380,7 @@ def ai_message(docs):
             functioncall_placeholder.markdown(f"```python\n"
                                               f"function_name: {function_name}, arguments: {function_arguments}\n"
                                               f"```")
-            full_response, notifications = hanhandle_function_calls(function_name, function_arguments_json=function_arguments_json)
+            full_response, notifications = hanhandle_function_calls(function_name, function_arguments_json=function_arguments_json, message_placeholder=message_placeholder, functioncall_placeholder=functioncall_placeholder)
 
             #parsed_json = json.loads(function_arguments_json)
 
