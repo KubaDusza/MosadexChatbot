@@ -49,7 +49,7 @@ TOOLS = [{
       "type": "function",
       "function": {
         "name": "notify_pharmacist",
-        "description": "Sends a notification message to the pharmacist and provides a predetermined response to the user to confirm the action. User can also request to send this message",
+        "description": "Sends a notification message, OR WARNING WHEN DETECTED HARMFUL MESSAGE to the pharmacist and provides a predetermined response to the user to confirm the action. User can also request to send this message",
         "parameters": {
           "type": "object",
           "properties": {
