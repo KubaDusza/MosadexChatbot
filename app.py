@@ -60,7 +60,7 @@ key features:
             st.write("1. add behaviour to the chatbot by inserting some requirement to the **System Prompt**, like:\n\n"
                      "          act like a duck, by adding *quack!* to your sentences       \n\n"
                      "2. Try asking for the data in the patients records or from the text information about the pharmacy\n\n"
-                     "3. Ask it to add new or change existing record data, like changing the age, scheduling an appointment, taking a note, or saying, that you are allergic and see the example record data change (Cannot add new fields, only modify existing ones)\n\n"
+                     "3. Ask it to add new or change existing record data, like changing the age, scheduling an appointment, taking a note, or saying, that you are allergicn\n\n"
                      "4. Ask it for opening hours of one of given pharmacies, like \"Green Valley Pharmacy\" and watch it use the API to answer the question\n\n"
                      "5. Ask it to notify the pharmacist about something\n\n"
                      "6. Send a worrying message on the chat, like:\n\n "
