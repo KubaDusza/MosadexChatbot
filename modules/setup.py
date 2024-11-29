@@ -66,7 +66,7 @@ def grant_access():
     allowed_emails = st.secrets.get("ALLOWED_EMAILS")
     allowed_access_keys = st.secrets.get("ALLOWED_ACCESS_KEYS")
 
-    query_dict = st.experimental_get_query_params()
+    query_dict = st._get_query_params()
 
     query_access_key = query_dict.get("access_key", None)
 
@@ -82,7 +82,7 @@ def grant_access():
             #st.write(
             #    "You are not logged in. You can log in or create streamlit accout here:\n https://share.streamlit.io/")
         else:
-            st.write(f"sorry, email {st.experimental_user.email}has no access. Log in to an allowed account")
+            st.write(f"sorry, email {st.experimental_user.email} has no access. Log in to an allowed account")
 
         st.write("Paste an access key:")
 
